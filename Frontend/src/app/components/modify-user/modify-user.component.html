@@ -1,0 +1,202 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of users; let i = index">
+            <th scope="row">{{ i }}</th>
+            <td>{{ u.name }}</td>
+            <td>{{ u.deliveryAdress }}</td>
+            <td>{{ u.email }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="showForm(u.id)"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmacion</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ message }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="close()">
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<tr
+  *ngIf="errorMessage"
+  class="h-100 d-flex align-items-center justify-content-center"
+>
+  <td colspan="100%">
+    <div class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  </td>
+</tr>
+
+<!-- FORM -->
+
+<div class="container" *ngIf="userToModify">
+  <form class="well form-horizontal" action=" " method="post" id="contact_form">
+    <fieldset>
+      <!-- Form Name -->
+      <legend>Modify User</legend>
+
+      <!-- First Name-->
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">Name</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-user"></i
+            ></span>
+            <input
+              name="first_name"
+              placeholder="{{ userToModify.name }}"
+              class="form-control"
+              type="text"
+              [(ngModel)]="name"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Address Name-->
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">Adress</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-user"></i
+            ></span>
+            <input
+              name="adress"
+              placeholder="{{ userToModify.deliveryAdress }}"
+              class="form-control"
+              type="text"
+              [(ngModel)]="adress"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Email input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">E-Mail</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-envelope"></i
+            ></span>
+            <input
+              name="email"
+              placeholder="{{ userToModify.email }}"
+              class="form-control"
+              type="text"
+              [(ngModel)]="email"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Email input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Password</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-envelope"></i
+            ></span>
+            <input
+              name="password"
+              placeholder="*********"
+              class="form-control"
+              type="password"
+              [(ngModel)]="password"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Role Basic -->
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">Role</label>
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-list"></i
+            ></span>
+            <select name="roles" class="form-select" [(ngModel)]="role">
+              <option value=" ">Please select the new role</option>
+              <option *ngFor="let role of roles" value="{{ role.id }}">
+                {{ role.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+          <button
+            type="submit"
+            class="btn btn-warning"
+            (click)="onFormSubmit()"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            Send <span class="glyphicon glyphicon-send"></span>
+          </button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<!-- /.container -->

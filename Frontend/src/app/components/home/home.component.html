@@ -1,0 +1,137 @@
+<tr
+  *ngIf="message"
+  class="h-100 d-flex align-items-center justify-content-center"
+>
+  <td colspan="100%">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{ message }}</strong>
+    </div>
+  </td>
+</tr>
+<tr *ngIf="errorMessage" class="h-100 d-flex align-items-center justify-content-center">
+  <td colspan="100%">
+    <div class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  </td>
+</tr>
+<!--SIDEBAR-->
+<div class="container my-sm-5 border p-0 bg-sec-light">
+  <div id="content">
+    <div class="bg-light p-2 px-md-4 px-3 shadow-sm">
+      <div class="d-flex align-items-center">
+        <div id="navigator" class="text-primary"></div>
+      </div>
+    </div>
+    <div class="d-sm-flex align-items-sm-center py-sm-3 px-md-3 location">
+      <input
+        type="text"
+        required
+        placeholder="Text..."
+        class="mx-sm-2 mx-3 my-sm-0 my-2 form-control"
+        [(ngModel)]="filterText"
+      />
+      <label class="tick"
+        >Available for promotion
+        <input
+          type="checkbox"
+          value="yes"
+          [(ngModel)]="availableForPromotion"
+        />
+        <span class="check"></span>
+      </label>
+      <input
+        type="submit"
+        value="search"
+        class="btn btn-primary mx-3 my-sm-0 mb-2"
+        (click)="searchProducts()"
+      />
+    </div>
+    <div class="d-sm-flex">
+      <div class="me-sm-2">
+        <div id="filter" class="p-2 bg-light ms-md-4 ms-sm-2 border">
+          <div class="border-bottom h5 text-uppercase">Filter By</div>
+          <div class="box border-bottom">
+            <div class="box-label text-uppercase d-flex align-items-center">
+              Price
+              <button
+                class="btn ms-auto"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#inner-box"
+                aria-expanded="false"
+                aria-controls="inner-box"
+              ></button>
+            </div>
+            <div id="inner-box" class="collapse show">
+              <input
+                type="number"
+                required
+                placeholder="Min value"
+                class="mx-sm-2 mx-3 my-sm-0 my-2 form-control"
+                [(ngModel)]="minValue"
+                min="0"
+              />
+              <input
+                type="number"
+                required
+                placeholder="Max value"
+                class="mx-sm-2 mx-3 my-sm-0 my-2 form-control"
+                [(ngModel)]="maxValue"
+                max="1000000"
+                min="0"
+              />
+              <select class="form-select" aria-label="Default select example" [(ngModel)]="category">
+                <option *ngFor="let enum of categories" value="{{ enum }}">
+                  {{ enum }}
+                </option>
+              </select>
+              <br>
+              <select class="form-select" aria-label="Default select example" [(ngModel)]="brandId">
+                <option *ngFor="let b of myBrands" value="{{ b.id }}">
+                  {{ b.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="bg-white p-2 border" id="hotels">
+        <div
+          class="hotel py-2 px-2 pb-4 border-bottom"
+          *ngFor="let p of myProducts"
+        >
+          <div class="row">
+            <div class="col-lg-3">
+              <img src="{{ p.imageURL }}" alt="..." class="hotel-img" />
+            </div>
+            <div class="col-lg-9">
+              <div class="d-md-flex align-items-md-center">
+                <div class="name">
+                  {{ p.productName }}
+                  <span class="city">${{ p.price }}</span>
+                </div>
+              </div>
+              <div class="d-flex flex-column tags pt-1">
+                <div>{{ p.category }} {{ p.brandName }}</div>
+                <div></div>
+              </div>
+              <div class="d-flex justify-content-end mt-1">
+                <div class="btn enquiry text-uppercase mx-2" hidden>Modify</div>
+                <div
+                  class="btn btn-primary text-uppercase"
+                  (click)="addToCart(p.productId)"
+                >
+                  Add to cart
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

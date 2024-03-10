@@ -1,0 +1,162 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Name</th>
+            <th scope="col">IsActive</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of discounts; let i = index">
+            <th scope="row">{{ i }}</th>
+            <td>{{ d.name }}</td>
+            <td>{{ d.isActive}}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="showForm(d.id)"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- FORM -->
+
+<div class="container" *ngIf="selectedDiscount">
+  <form class="well form-horizontal" action=" " method="post" id="contact_form">
+    <fieldset>
+      <!-- Form Name -->
+      <legend>Modify QuantityDiscount</legend>
+
+      <!-- Name-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Name</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-user"></i
+            ></span>
+            <input
+              name="first_name"
+              placeholder="{{ selectedDiscount.name }}"
+              class="form-control"
+              type="text"
+              [(ngModel)]="name"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Number input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Minimum products needed for discount to be applied</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-envelope"></i
+            ></span>
+            <input
+              name="password"
+              placeholder="{{selectedDiscount.minProductNeededForDiscount}}"
+              class="form-control"
+              type="number"
+              [(ngModel)]="minProductsForPromotion"
+            />
+          </div>
+        </div>
+      </div>
+            <!-- Number input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label">Number of products to be free</label>
+              <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                  <span class="input-group-addon"
+                    ><i class="glyphicon glyphicon-envelope"></i
+                  ></span>
+                  <input
+                    name="password"
+                    placeholder="{{selectedDiscount.numberOfProductToBeFree}}"
+                    class="form-control"
+                    type="number"
+                    [(ngModel)]="numberOfProductsToBeFree"
+                  />
+                </div>
+              </div>
+            </div>
+      <!-- Color Basic -->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Category</label>
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-list"></i
+            ></span>
+            <select name="roles" class="form-select" [(ngModel)]="productCategory">
+              <option value=" " disabled>Please select the new color</option>
+              <option *ngFor="let cat of myCategories" value="{{ cat }}">
+                {{ cat }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- Product to be discounted Basic -->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Product to be Discounted</label>
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-list"></i
+            ></span>
+            <select name="roles" class="form-select" [(ngModel)]="productToBeDiscounted">
+              <option value=" " disabled>Please select what product will be discounted</option>
+              <option value="MaxValue">Maximum value</option>
+              <option value="MinValue">Minimum value</option>
+            </select>
+          </div>
+        </div>
+      </div>
+            <!-- Product to be discounted Basic -->
+            <div class="form-group">
+              <label class="col-md-4 control-label">Will this discount be active?</label>
+              <div class="col-md-4 selectContainer">
+                <div class="input-group">
+                  <span class="input-group-addon"
+                    ><i class="glyphicon glyphicon-list"></i
+                  ></span>
+                  <select name="roles" class="form-select" [(ngModel)]="isActive">
+                    <option value=" " disabled>Please select the availability of your product</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+          <button
+            type="submit"
+            class="btn btn-warning"
+            (click)="onFormSubmit()"
+          >
+            Send <span class="glyphicon glyphicon-send"></span>
+          </button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<!-- /.container -->

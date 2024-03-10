@@ -1,0 +1,73 @@
+<tr *ngIf="errorMessage" class="h-100 d-flex align-items-center justify-content-center">
+  <td colspan="100%">
+    <div class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  </td>
+</tr>
+
+<div class ="row">
+  <div class="col-md-6 mx-auto p-0">
+    <div class="card">
+<div class="login-box">
+  <div class="login-snip">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Login</label>
+    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+
+    <div class="login-space">
+      <div class="login">
+        <div class="group">
+          <label for="user" class="label">Email</label>
+          <input id="email" name="email" type="text" class="input"  placeholder="Enter your email" [(ngModel)]="email"
+          [ngModelOptions]="{ standalone: true }"(keyup.enter)="submitLogin()">
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Password</label>
+          <input id="pass" name="password" type="password" class="input" data-type="password" placeholder="Enter your password" value=""
+          [(ngModel)]="password"[ngModelOptions]="{ standalone: true }" (keyup.enter)="submitLogin()">
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="group">
+          <input type="submit" class="button" value="Sign In" (click)="submitLogin()" >
+        </div>
+      </div>
+
+      <div class="sign-up-form">
+        <div class="group">
+          <label for="user" class="label">Name</label>
+          <input id="user" type="text" class="input" placeholder="Create your Username" value=""
+          [(ngModel)]="newUserName"[ngModelOptions]="{ standalone: true }" (keyup.enter)="submitLogin()">
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Email Address</label>
+          <input id="email" type="text" class="input" placeholder="Enter your email address" value=""
+          [(ngModel)]="newUserEmail"[ngModelOptions]="{ standalone: true }">
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Password</label>
+          <input id="pass" type="password" class="input" data-type="password" placeholder="Create your password" value=""
+          [(ngModel)]="newUserPassword"[ngModelOptions]="{ standalone: true }">
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Repeat Password</label>
+          <input id="pass" type="password" class="input" data-type="password" placeholder="Repeat your password" value=""
+          [(ngModel)]="newUserPasswordRepeated"[ngModelOptions]="{ standalone: true }">
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Delivery Address</label>
+          <input id="delivery" type="text" class="input" placeholder="Enter your address address" value=""
+          [(ngModel)]="newUserDeliveryAddress"[ngModelOptions]="{ standalone: true }">
+        </div>
+        <div class="group">
+          <input type="submit" class="button" value="Sign Up" (click)="submitSignIn()">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+

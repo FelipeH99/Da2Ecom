@@ -1,0 +1,146 @@
+<tr
+  *ngIf="message"
+  class="h-100 d-flex align-items-center justify-content-center"
+>
+  <td colspan="100%">
+    <div class="alert alert-danger">
+      {{ message }}
+    </div>
+  </td>
+</tr>
+<section class="h-100 h-custom" style="background-color: #eee">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-lg-7">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-4"
+                >
+                  <div>
+                    <p class="mb-1">Shopping cart</p>
+                  </div>
+                </div>
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div
+                      class="d-flex justify-content-between"
+                      *ngFor="let p of products"
+                    >
+                      <div class="d-flex flex-row align-items-center">
+                        <div>
+                          <img
+                            src="{{ p.imageURL }}"
+                            class="img-fluid rounded-3"
+                            alt="Shopping item"
+                            style="width: 65px"
+                          />
+                        </div>
+                        <div class="ms-3">
+                          <h5>{{ p.name }}</h5>
+                          <p class="small mb-0">{{ p.category }}</p>
+                          <p class="small mb-0">{{ p.description }}</p>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row align-items-center">
+                        <div style="width: 50px">
+                          <h5 class="fw-normal mb-0">1</h5>
+                        </div>
+                        <div style="width: 80px">
+                          <h5 class="mb-0">{{ p.price }}</h5>
+                        </div>
+                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                          <a href="#!" class="text-danger"
+                            ><i
+                              class="bi bi-trash-fill"
+                              (click)="removeProduct(p.id)"
+                            ></i
+                          ></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div
+                  class="card bg-primary text-white rounded-3"
+                  style="padding: 5px"
+                >
+                  <div class="card-body">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-4"
+                    >
+                      <h5 class="mb-0">Card details</h5>
+                    </div>
+
+                    <p class="small mb-2">Card type</p>
+                    <select
+                      id="colorsSelector"
+                      class="form-select"
+                      required="required"
+                      data-error="You must specify a color"
+                      #ref
+                      (change)="getSelectedValue(ref.value)"
+                    >
+                      <option *ngFor="let p of payments" value="{{ p.id }}">
+                        {{ p.name }}
+                      </option>
+                    </select>
+
+                    <hr class="my-4" />
+
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">Subtotal</p>
+                      <p class="mb-2">${{ subTotal }}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">Shipping</p>
+                      <p class="mb-2">${{ shipping }}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4">
+                      <p class="mb-2">Taxes(22%)</p>
+                      <p class="mb-2">${{ iva }}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4">
+                      <p class="mb-2">Discount Applied</p>
+                      <p class="mb-2">
+                        {{ discountApplied.mensaje }} ${{
+                          discountApplied.descuento
+                        }}
+                      </p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4">
+                      <p class="mb-2">Total(Incl. taxes)</p>
+                      <p class="mb-2">${{ totalPrice }}</p>
+                    </div>
+
+                    <button type="button" class="btn btn-info btn-block btn-lg">
+                      <div class="d-flex justify-content-between">
+                        <span>${{ totalPrice }}</span>
+                        <span
+                          >Checkout
+                          <i
+                            type="submit"
+                            class="fas fa-long-arrow-alt-right ms-2"
+                            (click)="createPurchase()"
+                          ></i
+                        ></span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,221 @@
+<tr
+  *ngIf="error"
+  class="h-100 d-flex align-items-center justify-content-center"
+>
+  <td colspan="100%">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{ error }}</strong>
+    </div>
+  </td>
+</tr>
+
+<!-- FORM -->
+
+<div class="container">
+  <form class="well form-horizontal" action=" " method="post" id="contact_form">
+    <fieldset>
+      <!-- Form Name -->
+      <legend>Create Product</legend>
+
+      <!-- First Name-->
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">Name</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-user"></i
+            ></span>
+            <input
+              name="first_name"
+              placeholder="Product name"
+              class="form-control"
+              type="text"
+              [(ngModel)]="name"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Address Name-->
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">Description</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-user"></i
+            ></span>
+            <input
+              name="adress"
+              placeholder="Description"
+              class="form-control"
+              type="text"
+              [(ngModel)]="description"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Email input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Price</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-envelope"></i
+            ></span>
+            <input
+              name="email"
+              placeholder="$"
+              class="form-control"
+              type="number"
+              min="0"
+              max="100000"
+              [(ngModel)]="price"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Email input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Stock</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-envelope"></i
+            ></span>
+            <input
+              name="email"
+              placeholder="4"
+              class="form-control"
+              type="number"
+              min="0"
+              max="1000"
+              [(ngModel)]="stock"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Email input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Image URL(Optional)</label>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-envelope"></i
+            ></span>
+            <input
+              name="password"
+              placeholder="https://shorturl.at/hTVW6"
+              class="form-control"
+              type="text"
+              [(ngModel)]="url"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand Basic -->
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">Brand</label>
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-list"></i
+            ></span>
+            <select name="roles" class="form-select" [(ngModel)]="brand">
+              <option value=" ">Please select the new Brand</option>
+              <option *ngFor="let brand of myBrands" value="{{ brand.id }}">
+                {{brand.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- Color Basic -->
+      <div>
+        <div class="form-group">
+          <label class="form-control-label px-3"
+            >Color<span class="text-danger"> *</span></label
+          >
+          <select
+            id="colorsSelector"
+            class="form-select"
+            required="required"
+            data-error="You must specify a color"
+            #ref
+            (change)="getSelectedValue(ref.value)"
+          >
+            <option *ngFor="let c of myColors" value="{{ c.id }}">
+              {{ c.name }}
+            </option>
+          </select>
+          <i class="bi bi-plus" (click)="addColor()"></i>
+          <i class="bi bi-dash" (click)="removeColor()"></i>
+        </div>
+        <label *ngFor="let color of selectedColors"> {{ color.name }}</label>
+        <br />
+      </div>
+
+      <!-- Product category Basic -->
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">Product Category</label>
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-list"></i
+            ></span>
+            <select
+              name="roles"
+              class="form-select"
+              [(ngModel)]="productCategory"
+            >
+              <option value=" ">Please select the new Category</option>
+              <option *ngFor="let cat of categories" value="{{ cat }}">
+                {{ cat }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label">Available for promotion</label>
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-list"></i
+            ></span>
+            <select
+              name="roles"
+              class="form-select"
+              [(ngModel)]="availableForPromotion"
+            >
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+          <button
+            type="submit"
+            class="btn btn-warning"
+            (click)="onFormSubmit()"
+
+          >
+            Send <span class="glyphicon glyphicon-send"></span>
+          </button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<!-- /.container -->

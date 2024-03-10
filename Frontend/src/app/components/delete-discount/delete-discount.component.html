@@ -1,0 +1,85 @@
+<tr
+  *ngIf="errorMessage"
+  class="h-100 d-flex align-items-center justify-content-center"
+>
+  <td colspan="100%">
+    <div class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  </td>
+</tr>
+
+<!-- FORM -->
+<div class="container">
+  <form class="well form-horizontal" action=" " method="post" id="contact_form">
+    <fieldset>
+      <!-- Form Name -->
+      <legend>Delete Discount</legend>
+      <!-- Role Basic -->
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">Discount</label>
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+            <span class="input-group-addon"
+              ><i class="glyphicon glyphicon-list"></i
+            ></span>
+            <select name="roles" class="form-select" [(ngModel)]="selectedType">
+              <option value=" " disabled>Please select the discount type</option>
+              <option value="Brand"> Brand Discount</option>
+              <option value="Color"> Color Discount</option>
+              <option value="Percentage"> Percentage Discount</option>
+              <option value="Quantity"> Quantity Discount</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+          <button
+            type="submit"
+            class="btn btn-warning"
+            (click)="showDiscounts()"
+          >
+            Request <span class="glyphicon glyphicon-send"></span>
+          </button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<!-- /.container -->
+<div class="container" *ngIf="display">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of myDiscounts; let i = index">
+            <th scope="row">{{ i }}</th>
+            <td>{{ d.name }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="delete(d.id)"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

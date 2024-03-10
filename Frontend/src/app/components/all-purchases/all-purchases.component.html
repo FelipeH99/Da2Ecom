@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Number Of Products Purchased</th>
+            <th scope="col">User</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of purchases">
+            <td>{{ p.purchaseDate }}</td>
+            <td>{{ p.finalPrice }}</td>
+            <td>{{ p.products.length }}</td>
+            <td>{{ p.userName }}</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<tr *ngIf="error" class="h-100 d-flex align-items-center justify-content-center">
+  <td colspan="100%">
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
+  </td>
+</tr>
+
